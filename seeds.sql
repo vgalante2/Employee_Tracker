@@ -15,27 +15,28 @@ INSERT INTO departments (name) VALUES
 
 
 INSERT INTO roles (title, salary) VALUES
-('Chief Financial Officer', 120,000),
-('Recruiter', 60,000),
-('Software Developer', 105,000),
-('Digital Marketer', 70,000),
-('Account Executive', 75,000),
-('Legal Advisor', 95,000),
-('Chief Executive Officer ', 400,000),
-('Accountant', 70,000);
+('Chief Financial Officer', 120000),
+('Recruiter', 60000),
+('Software Developer', 105000),
+('Digital Marketer', 70000),
+('Account Executive', 75000),
+('Legal Advisor', 95000),
+('Chief Executive Officer', 400000),
+('Accountant', 70000),
+('Sales Representative', 65000);
 
 
 
-
-INSERT INTO employees (first_name, last_name) VALUES
-('John', 'Doe'),
-('Eric', 'Johnson'),
-('Gina', 'Wilson'),
-('Rose', 'Smith'),
-('Sam', 'Caruso'),
-('Vin', 'Galante'),
-('Anthony', 'Jones'),
-('Hector', 'Davis');
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES
+('John', 'Doe', 6, 2),
+('Eric', 'Johnson', 2, 6),
+('Gina', 'Wilson', 2, 1),
+('Rose', 'Smith', 5, 6),
+('Sam', 'Caruso', 1, 3),
+('Vin', 'Galante', 3, 3),
+('Anthony', 'Paradiso', 7, 3),
+('Hector', 'Davis', 6, 2),
+('Spencer', 'Jennings', 9, 8);
 
 
 
