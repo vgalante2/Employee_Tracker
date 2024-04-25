@@ -51,7 +51,7 @@ async function addDepartment() {
     const answers = await inquirer.prompt([
         {
             type: 'input',
-            name: 'title',
+            name: 'name',
             message: 'What department would you like to add?'
         }
        
@@ -60,8 +60,8 @@ async function addDepartment() {
       
       try {
         
-        const sqlQuery = 'INSERT INTO roles (name) VALUES ($1)';
-        const values = answers.title;
+        const sqlQuery = 'INSERT INTO departments (name) VALUES ($1)';
+        const values = [answers.name];
         
         pool.query(sqlQuery, values)
         .then((res) => {
@@ -116,16 +116,77 @@ async function addRole() {
     })  
 }
 
-function addEmployee() {
-    console.log('Adding a new employee...');
-    // Implement prompt and insertion logic here
-    mainMenu();
+async function addEmployee() {
+    const answers = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'first_name',
+            message: 'What is their first name?'
+        },
+        {
+            type: 'input',
+            name: 'last_name',
+            message: 'What is their last name?'
+        },
+        {
+            type: 'input',
+            name: 'roleId',
+            message: 'What is the role ID?'
+        },
+        {
+            type: 'input',
+            name: 'managerId',
+            message: 'What is the department ID?'
+        }
+    ])
+    .then( async (answers) => {
+      
+      try {
+        
+        const sqlQuery = 'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ($1, $2, $3, $4)';
+        const values = [answers.first_name, answers.last_name, parseFloat(answers.roleId), parseInt(answers.managerId)];
+        
+        pool.query(sqlQuery, values)
+        .then((res) => {
+            console.log('Adding a new employee...');
+            console.log(res.rows)
+            mainMenu();
+        })
+       
+    } catch (err) {
+        console.error('Error executing query', err.stack);
+        mainMenu();
+    }
+    })  
 }
 
-function updateEmployeeRole() {
-    console.log('Updating employee role...');
-    // Implement prompt and update logic here
-    mainMenu();
+async function updateEmployeeRole() {
+    // Get employee and new role information via inquirer
+    const answers = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'employeeId',
+            message: 'Enter the ID of the employee whose role you want to update:'
+        },
+        {
+            type: 'input',
+            name: 'newRoleId',
+            message: 'Enter the new role ID for the employee:'
+        }
+    ]);
+
+    const sqlQuery = 'UPDATE employee SET role_id = $1 WHERE id = $2';
+    try {
+        const res = await pool.query(sqlQuery, [answers.newRoleId, answers.employeeId]);
+        if (res.rowCount > 0) {
+            console.log('Employee role updated successfully!');
+            mainMenu();
+        } else {
+            console.log('No employee found with the given ID.');
+        }
+    } catch (err) {
+        console.error('Error executing update query', err.stack);
+    }
 }
 
 
