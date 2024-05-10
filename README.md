@@ -9,7 +9,9 @@ The Employee Tracker will be your companies best friend! Track your employees an
 
 ## Deployment
 
-DEMO - [LIVE DEMO](Your_REPO_LINK)
+DEMO - [LIVE DEMO](https://drive.google.com/file/d/1B45-GUFFraQkn-C4fk6g1Inpg-UVha8H/view)
+
+![](/Assets/gi2.gif)
 
 ## Usage
 
